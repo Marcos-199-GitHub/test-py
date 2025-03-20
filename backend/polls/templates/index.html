@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="refresh" content="5">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="text-gray-900 bg-blue-300 justify-center items-center w-full flex mt-6">
+    <div class="w-3/4 flex justify-between flex-col">
+        <div class="flex justify-between items-center bg-sky-50 p-2 rounded-lg shadow-lg mb-6">
+            <span class="text-gray-800 mb-1">horaActual: {{ horaActual }}</span>
+            <span class="text-gray-800 mb-1">horaCompar: {{ horaCompar }}</span>
+            <span class="text-gray-800 mb-1">diaSemActual: {{ diaSemActual }}</span>
+        </div>
+
+        <h1 class="text-xl font-bold text-center mb-4">Seleccion</h1>
+        <div>
+            {% for datos in seleccion %}
+            <div class="flex flex-col justify-between items-center bg-sky-50 p-2 rounded-lg shadow-lg mb-6">
+                <div class="">
+                    <span class="text-gray-800 mb-1">Grupo: {{ datos.Grupo }}</span>
+                    <span class="text-gray-800 mb-1">Asignatura: {{ datos.Asignatura }}</span>
+                    <span class="text-gray-800 mb-1">Profesor: {{ datos.Profesor }}</span>
+                </div>
+                <div>
+                    <span class="text-gray-800 mb-1">Edificio: {{ datos.Edificio }}</span>
+                    <span class="text-gray-800 mb-1">Salon: {{ datos.Salon }}</span>
+                </div>
+                <div>
+                    <span>Lunes: {{ datos.Lun }}</span>
+                    <span>Martes: {{ datos.Mar }}</span>
+                    <span>Miercoles: {{ datos.Mie }}</span>
+                    <span>Jueves: {{ datos.Jue }}</span>
+                    <span>Viernes: {{ datos.Vie }}</span>
+                    <span>Sabado: {{ datos.Sab }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h1 class="text-xl font-bold text-center mb-4">Salones libres</h1>
+        <div class="grid grid-cols-10 gap-4">
+            {% for room in eRooms %}
+            <span class="text-xl bg-gray-100 text-center p-1"> {{ room }} </span>
+            {% endfor %}
+        </div>
+
+
+        <h1 class="text-xl font-bold text-center mt-8 mb-4">Ocupabilidad del {{salon.Salon.0}}</h1>
+        <div class="grid grid-cols-6 gap-4">
+            <div class="bg-blue-100 flex flex-col">
+                <span class="text-xl text-center p-1 mt-4 block"> Lunes</span>
+                <div class="flex flex-col-reverse">
+                    {% for sal in salon.Lun %}
+                    <span class="text-xl text-center p-1 mt-4 block"> {{ sal }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bg-blue-100 flex flex-col">
+                <span class="text-xl text-center p-1 mt-4 block"> Martes</span>
+                <div class="flex flex-col-reverse">
+                    {% for sal in salon.Mar %}
+                    <span class="text-xl text-center p-1 mt-4 block"> {{ sal }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bg-blue-100 flex flex-col">
+                <span class="text-xl text-center p-1 mt-4 block"> Miercoles</span>
+                <div class="flex flex-col-reverse">
+                    {% for sal in salon.Mie %}
+                    <span class="text-xl text-center p-1 mt-4 block"> {{ sal }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bg-blue-100 flex flex-col">
+                <span class="text-xl text-center p-1 mt-4 block"> Jueves</span>
+                <div class="flex flex-col-reverse">
+                    {% for sal in salon.Jue %}
+                    <span class="text-xl text-center p-1 mt-4 block"> {{ sal }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bg-blue-100 flex flex-col">
+                <span class="text-xl text-center p-1 mt-4 block"> Viernes</span>
+                <div class="flex flex-col-reverse">
+                    {% for sal in salon.Vie %}
+                    <span class="text-xl text-center p-1 mt-4 block"> {{ sal }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bg-blue-100 flex flex-col">
+                <span class="text-xl text-center p-1 mt-4 block"> Sabado</span>
+                <div class="flex flex-col-reverse">
+                    {% for sal in salon.Sab %}
+                    <span class="text-xl text-center p-1 mt-4 block"> {{ sal }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-xl font-bold text-center mb-4">Profesores</h1>
+        <div class="overflow-auto max-h-80 grid grid-flow-row grid-cols-5 gap-1 bg-blue-400 p-2">
+            {% for profesor in profesores %}
+            <div class="flex justify-between items-center bg-blue-500 p-2 rounded-lg shadow-lg">
+                <span class="text-gray-50">{{ profesor }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        // Obtener los elementos del botón y el contenido
+        var boton = document.getElementById("boton");
+        var contenido = document.getElementById("contenido");
+
+        // Función para mostrar/ocultar el contenido
+        boton.onclick = function () {
+            if (contenido.classList.contains("hidden")) {
+                contenido.classList.remove("hidden");  // Mostrar el contenido
+                boton.innerHTML = "Ocultar Información";  // Cambiar el texto del botón
+            } else {
+                contenido.classList.add("hidden");  // Ocultar el contenido
+                boton.innerHTML = "Mostrar Información";  // Cambiar el texto del botón
+            }
+        }
+    </script>
+</body>
+</html>
